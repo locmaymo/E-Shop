@@ -41,7 +41,7 @@ namespace Catalog.API.DAO
             }
             catch (Exception ex)
             {
-                _logger.LogError("TraceId:{id}. Execute Query {Request} in database catch\n. Exception:{Exception}\n. Stacktrace:{Stacktrace}", requestId, typeof(T).Name, ex.Message, ex.StackTrace);
+                _logger.LogError("TraceId:{id}. Execute Query {Request} in database catch\n. -Exception:{Exception}\n. -Stacktrace:{Stacktrace}", requestId, typeof(T).Name, ex.Message, ex.StackTrace);
                 throw new InternalServerException(ex.Message);
             }
         }
@@ -73,7 +73,7 @@ namespace Catalog.API.DAO
             }
             catch (Exception ex)
             {
-                _logger.LogError("TraceId:{id}. Execute Query {Request} in database catch\n. Exception:{Exception}\n. Stacktrace:{Stacktrace}", requestId, typeof(T).Name, ex.Message, ex.StackTrace);
+                _logger.LogError("TraceId:{id}. Execute Query {Request} in database catch\n. -Exception:{Exception}\n. -Stacktrace:{Stacktrace}", requestId, typeof(T).Name, ex.Message, ex.StackTrace);
                 throw new InternalServerException(ex.Message);
             }
         }
@@ -96,13 +96,13 @@ namespace Catalog.API.DAO
             }
             catch (DbUpdateException dbx)
             {
-                _logger.LogError(dbx, "[ERROR] TraceId:{id}. Database occurred while add product {productName} with Id = {Id} to database\n. Exception:{exception}.\n StackTrace:{stackTrace}.",
+                _logger.LogError(dbx, "[ERROR] TraceId:{id}. Database occurred while add product {productName} with Id = {Id} to database\n. -Exception:{exception}.\n -StackTrace:{stackTrace}.",
                              requestId, typeof(T).Name, entity.Id, dbx.Message, dbx.StackTrace);
                 throw new InternalServerException(dbx.InnerException.ToString() ?? dbx.Message);
             }
             catch (Exception ex)
             {
-                _logger.LogError("[ERROR] TraceId:{id}. Add {Request} entity with Id = {Id} to database catch\n. Exception:{Exception}\n. Stacktrace:{Stacktrace}.", requestId, typeof(T).Name, entity.Id, ex.Message, ex.StackTrace);
+                _logger.LogError("[ERROR] TraceId:{id}. Add {Request} entity with Id = {Id} to database catch\n. -Exception:{Exception}\n. -Stacktrace:{Stacktrace}.", requestId, typeof(T).Name, entity.Id, ex.Message, ex.StackTrace);
                 throw new InternalServerException(ex.Message);
             }
         }
@@ -125,13 +125,13 @@ namespace Catalog.API.DAO
             }
             catch (DbUpdateException dbx)
             {
-                _logger.LogError(dbx, "[ERROR] TraceId:{id}. Database occurred while update product {productName} with Id = {Id} to database\n. Exception:{exception}.\n StackTrace:{stackTrace}.",
+                _logger.LogError(dbx, "[ERROR] TraceId:{id}. Database occurred while update product {productName} with Id = {Id} to database\n. -Exception:{exception}.\n -StackTrace:{stackTrace}.",
                              requestId, typeof(T).Name, entity.Id, dbx.Message, dbx.StackTrace);
                 throw new InternalServerException(dbx.Message);
             }
             catch (Exception ex)
             {
-                _logger.LogError("[ERROR] TraceId:{id}. Update {Request} entity with Id = {Id} to database catch\n. Exception:{exception}\n. Stacktrace:{Stacktrace}.", requestId, typeof(T).Name, entity.Id, ex.Message, ex.StackTrace);
+                _logger.LogError("[ERROR] TraceId:{id}. Update {Request} entity with Id = {Id} to database catch\n. -Exception:{exception}\n. -Stacktrace:{Stacktrace}.", requestId, typeof(T).Name, entity.Id, ex.Message, ex.StackTrace);
                 throw new InternalServerException(ex.Message);
             }
         }
