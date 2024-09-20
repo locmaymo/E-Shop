@@ -21,6 +21,7 @@ namespace Catalog.API.DTOs
 
     public class ProductPutDTO
     {
+        [Required]
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
@@ -36,8 +37,7 @@ namespace Catalog.API.DTOs
 
     public class ProductPostDTO
     {
-        [Required(ErrorMessage = "Name is required.")]
-        [StringLength(200, MinimumLength = 1, ErrorMessage = "Name must be between 1 and 200 characters.")]
+
         public string? Name { get; set; }
 
         [Required(ErrorMessage = "Description is required.")]
@@ -56,9 +56,13 @@ namespace Catalog.API.DTOs
         [Range(0, 100, ErrorMessage = "Discount must be between 0 and 100.")]
         public int? Discount { get; set; }
 
+        [Required(ErrorMessage = "Image is required.")]
+        [StringLength(200, MinimumLength = 1, ErrorMessage = "Image must be between 1 and 200 characters.")]
         public string? ImageURL { get; set; }
 
 
         public bool? IsActice { get; set; }
+        [Required]
+        public int? CategoryId { get; set; }
     }
 }

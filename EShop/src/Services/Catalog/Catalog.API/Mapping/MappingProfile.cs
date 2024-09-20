@@ -12,6 +12,11 @@ namespace Catalog.API.Mapping
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<Category, CategoryPostDTO>().ReverseMap();
             CreateMap<Category, CategoryPutDTO>().ReverseMap();
+
+            //product
+            CreateMap<Product, ProductGetDTO>().ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name ?? string.Empty));
+            CreateMap<Product, ProductPostDTO>().ReverseMap();
+            CreateMap<Product, ProductPutDTO>().ReverseMap();
         }
     }
 }

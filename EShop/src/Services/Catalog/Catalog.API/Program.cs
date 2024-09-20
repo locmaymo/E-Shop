@@ -4,6 +4,7 @@ using Catalog.API.IRepository;
 using Catalog.API.Mapping;
 using Catalog.API.Models;
 using Catalog.API.Repository;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
@@ -40,6 +41,7 @@ builder.Services.AddDbContext<CatalogDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerDatabase")));
 
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<ICustomExceptionHandler, CustomExceptionHandler>();
 
 
@@ -47,6 +49,11 @@ builder.Services.AddTransient<ICustomExceptionHandler, CustomExceptionHandler>()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

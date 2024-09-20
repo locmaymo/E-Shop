@@ -146,22 +146,22 @@ namespace Catalog.API.Repository
             }
         }
 
-        public async Task<bool> UpdateCategory(CategoryPutDTO categoryDTO)
+        public async Task<bool> UpdateCategory(CategoryPutDTO categoryPutDTO)
         {
 
-            _logger.LogInformation("TraceId:{id}, Update {Request} entity with Id = {Id}", requestId, typeof(Category).Name, categoryDTO.Id);
+            _logger.LogInformation("TraceId:{id}, Update {Request} entity with Id = {Id}", requestId, typeof(Category).Name, categoryPutDTO.Id);
             try
             {
-                var category = await GetEntity(c => c.Id == categoryDTO.Id);
+                var category = await GetEntity(c => c.Id == categoryPutDTO.Id);
                 if (category is null)
                 {
 
-                    throw new CategoryNotFoundException(categoryDTO.Id);
+                    throw new CategoryNotFoundException(categoryPutDTO.Id);
                 }
 
                 // Map the categoryDTO to Category entity
                 _logger.LogInformation("TraceId:{id}, Mapping {dto} to {model} ", requestId, typeof(CategoryPutDTO).Name, typeof(Category).Name);
-                category = _mapper.Map<Category>(categoryDTO);
+                category = _mapper.Map<Category>(categoryPutDTO);
 
                 // Update the entity and return status
                 var status = await UpdateEntity(category);
@@ -170,7 +170,7 @@ namespace Catalog.API.Repository
             catch (CategoryNotFoundException ex)
             {
 
-                _logger.LogInformation("TraceId:{id}. Retrieved {Request} entity with Id = {Id} return null.\n. Exception:{exception}.\n StackTrace:{stackTrace}.", requestId, typeof(Category).Name, categoryDTO.Id, ex.Message, ex.StackTrace);
+                _logger.LogInformation("TraceId:{id}. Retrieved {Request} entity with Id = {Id} return null.\n. Exception:{exception}.\n StackTrace:{stackTrace}.", requestId, typeof(Category).Name, categoryPutDTO.Id, ex.Message, ex.StackTrace);
                 throw;
             }
             catch (AutoMapperMappingException ex)
@@ -186,7 +186,7 @@ namespace Catalog.API.Repository
             catch (Exception ex)
             {
 
-                _logger.LogError(ex, "TraceId:{id}. An unexpected error occurred while updating the {Request} entity with Id = {Id}.\n. Exception:{exception}.\n StackTrace:{stackTrace}.", _httpContextAccessor.HttpContext?.TraceIdentifier, typeof(Category).Name, categoryDTO.Id, ex.Message, ex.StackTrace);
+                _logger.LogError(ex, "TraceId:{id}. An unexpected error occurred while updating the {Request} entity with Id = {Id}.\n. Exception:{exception}.\n StackTrace:{stackTrace}.", _httpContextAccessor.HttpContext?.TraceIdentifier, typeof(Category).Name, categoryPutDTO.Id, ex.Message, ex.StackTrace);
                 throw;
             }
 
