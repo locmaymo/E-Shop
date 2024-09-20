@@ -1,7 +1,9 @@
-﻿using Catalog.API.DTOs;
+﻿using AutoMapper;
+using BuildingBlock.Exceptions;
+using Catalog.API.DTOs;
+using Catalog.API.Exceptions;
 using Catalog.API.IRepository;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace Catalog.API.Controllers
 {
@@ -13,18 +15,21 @@ namespace Catalog.API.Controllers
 
         private readonly ILogger<CategoryController> _logger;
 
+
         public CategoryController(ICategoryRepository categoryRepository, ILogger<CategoryController> logger)
         {
             _categoryRepository = categoryRepository;
 
             _logger = logger;
 
+
         }
+        private string RequestId => HttpContext?.TraceIdentifier ?? "No Trace Identifier";
 
         [HttpGet]
-        public async Task<IActionResult> GetCategory()
+        public async Task<IActionResult> GetCategories()
         {
-
+            _logger.LogInformation("[Start] TraceId:{Id}, Received request:{Path}", RequestId, HttpContext.Request.Path);
 
             try
             {
@@ -32,10 +37,13 @@ namespace Catalog.API.Controllers
 
                 return Ok(categories);
             }
+            catch (Exception ex) when (ex is AutoMapperMappingException or CategoryInternalException)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
-
-                return BadRequest();
+                throw new CategoryInternalException(ex.Message);
             }
 
 
@@ -44,65 +52,106 @@ namespace Catalog.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoryById(int id)
         {
-            var category = await _categoryRepository.GetCategory(id);
-            return Ok(category);
+
+            _logger.LogInformation("[Start] TraceId:{Id}, Received request:{Path}", RequestId, HttpContext.Request.Path);
+            try
+            {
+                var category = await _categoryRepository.GetCategory(id);
+                return Ok(category);
+            }
+            catch (Exception ex) when (ex is AutoMapperMappingException or CategoryInternalException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new CategoryInternalException(ex.Message);
+            }
+
+
 
         }
 
         [HttpPost]
         public async Task<IActionResult> PostCategory(CategoryPostDTO categoryPostDTO)
         {
-            var categoryId = await _categoryRepository.CreateCategory(categoryPostDTO);
-            return Ok(categoryId);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> PutCategory(CategoryDTO categoryDTO)
-        {
-            var serializedRequestData = JsonSerializer.Serialize(new
+            _logger.LogInformation("[Start] TraceId:{Id}, Received request:{Path}", RequestId, HttpContext.Request.Path);
+            if (!ModelState.IsValid)
             {
-                Id = categoryDTO.Id,
-                Name = categoryDTO.Name,
-            });
+                _logger.LogError("TraceId:{Id}, Invalid Data in the Request Body", RequestId);
+                string errorDetails = string.Join("; ", ModelState.Values
+                                                    .SelectMany(v => v.Errors)
+                                                    .Select(e => e.ErrorMessage));
 
-
-
-            _logger.LogInformation("[Start] Id:{Id} Get request: {Path}", HttpContext.TraceIdentifier, HttpContext.Request.Path);
+                throw new BadRequestException(errorDetails);
+            }
             try
             {
-
-
-
-
-                var response = await _categoryRepository.UpdateCategory(categoryDTO);
-
-
-
-
-                return Ok();
+                var categoryId = await _categoryRepository.CreateCategory(categoryPostDTO);
+                return Ok(categoryId);
+            }
+            catch (Exception ex) when (ex is AutoMapperMappingException or CategoryInternalException or CategoryBadRequestException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
-
-
-
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-
-
+                throw new CategoryInternalException(ex.Message);
             }
-            finally
+
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> PutCategory(CategoryPutDTO categoryDTO)
+        {
+
+            _logger.LogInformation("[Start] TraceId:{Id}, Received request:{Path}", RequestId, HttpContext.Request.Path);
+
+            if (!ModelState.IsValid)
             {
-                _logger.LogInformation("[END] Id:{Id} Close request: {Path}.", HttpContext.TraceIdentifier, HttpContext.Request.Path);
+                _logger.LogError("TraceId:{Id}, Invalid Data in the Request Body", RequestId);
+                string errorDetails = string.Join("; ", ModelState.Values
+                                                    .SelectMany(v => v.Errors)
+                                                    .Select(e => e.ErrorMessage));
 
+                throw new BadRequestException(errorDetails);
             }
+            try
+            {
+                var response = await _categoryRepository.UpdateCategory(categoryDTO);
+                return Ok();
+            }
+            catch (Exception ex) when (ex is CategoryNotFoundException or AutoMapperMappingException or CategoryInternalException or BadRequestException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new CategoryInternalException(ex.Message);
+            }
+
+
         }
 
 
         [HttpDelete]
         public async Task<IActionResult> DeleteCategory(int id)
         {
-            var response = await _categoryRepository.DeleteCategory(id);
-            return Ok();
+            _logger.LogInformation("[Start] TraceId:{Id}, Received request:{Path}", RequestId, HttpContext.Request.Path);
+            try
+            {
+                var response = await _categoryRepository.DeleteCategory(id);
+                return Ok();
+            }
+            catch (Exception ex) when (ex is CategoryNotFoundException or CategoryInternalException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new CategoryInternalException(ex.Message);
+            }
+
         }
     }
 }

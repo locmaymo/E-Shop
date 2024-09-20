@@ -7,7 +7,7 @@ namespace Catalog.API.IRepository
         Task<IEnumerable<CategoryDTO>> GetAllCategory();
         Task<CategoryDTO> GetCategory(int id);
         Task<int> CreateCategory(CategoryPostDTO categoryPostDTO);
-        Task<bool> UpdateCategory(CategoryDTO categoryDTO);
+        Task<bool> UpdateCategory(CategoryPutDTO categoryDTO);
         Task<bool> DeleteCategory(int id);
     }
 }

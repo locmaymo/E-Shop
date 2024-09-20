@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -30,6 +31,12 @@ namespace BuildingBlock.Exceptions.Handlers
                     exception.GetType().Name,
                     httpContext.Response.StatusCode = StatusCodes.Status400BadRequest
                 ),
+                AutoMapperMappingException =>
+               (
+                   exception.Message,
+                   exception.GetType().Name,
+                   httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError
+               ),
                 NotFoundException =>
                 (
                     exception.Message,
