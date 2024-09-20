@@ -1,0 +1,28 @@
+2024-09-20 00:58:23.954 +07:00 [FTL] Application startup exception
+System.InvalidOperationException: 'Invoke' or 'InvokeAsync' does not return an object of type 'Task'.
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass5_0.<UseMiddleware>b__0(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.<ConfigureApplication>b__27_0(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2024-09-20 00:59:54.252 +07:00 [INF] Id: 0HN6OQJAVDNUE:00000013. Add Category entity
+2024-09-20 00:59:55.884 +07:00 [INF] [SUCCESS] Id: 0HN6OQJAVDNUE:00000013. Add Category  entity
+2024-09-20 01:00:10.859 +07:00 [INF] [Start] Id:0HN6OQJAVDNUE:00000015 Get request: /api/Category
+2024-09-20 01:00:10.862 +07:00 [INF] Id: 0HN6OQJAVDNUE:00000015. Update Category entity with Id = 0
+2024-09-20 01:00:10.890 +07:00 [INF] Id: 0HN6OQJAVDNUE:00000015. Get Category with c => (c.Id == value(Catalog.API.Repository.CategoryRepository+<>c__DisplayClass8_0).categoryDTO.Id)
+2024-09-20 01:00:11.314 +07:00 [INF] [SUCCESS] Id: 0HN6OQJAVDNUE:00000015. Fetch Category with 0 entity 
+2024-09-20 01:00:11.443 +07:00 [ERR] [ERROR]Id: 0HN6OQJAVDNUE:00000015. Update Category with Id = 0 catch
+. Exception: Entity "Category" (0) was not found
+.  Stacktrace:    at Catalog.API.Repository.CategoryRepository.UpdateCategory(CategoryDTO categoryDTO) in D:\Document\Documents\Project_CV\Microservices\EShop\src\Services\Catalog\Catalog.API\Repository\CategoryRepository.cs:line 77
+
+2024-09-20 01:00:11.513 +07:00 [INF] [END] Id:0HN6OQJAVDNUE:00000015 Close request: /api/Category.
+2024-09-20 01:04:07.394 +07:00 [INF] Id: 0HN6OQJAVDNUE:00000017. Get Category with c => (c.Id == value(Catalog.API.Repository.CategoryRepository+<>c__DisplayClass7_0).id)
+2024-09-20 01:04:07.406 +07:00 [INF] [SUCCESS] Id: 0HN6OQJAVDNUE:00000017. Fetch Category with 1 entity 
+2024-09-20 01:07:05.633 +07:00 [INF] Id: 0HN6OQJAVDNUE:00000019. Add Category entity
+2024-09-20 01:07:05.641 +07:00 [INF] [SUCCESS] Id: 0HN6OQJAVDNUE:00000019. Add Category  entity
+2024-09-20 01:07:08.691 +07:00 [INF]  Id: 0HN6OQJAVDNUE:0000001B. Get Category  with null
+2024-09-20 01:07:08.694 +07:00 [INF] [SUCCESS] Id: 0HN6OQJAVDNUE:0000001B. Fetch Category  entity 
+2024-09-20 08:22:14.592 +07:00 [INF]  Id: 0HN6P2AJ0NOBP:00000011. Get Category  with null
+2024-09-20 08:22:15.389 +07:00 [INF] [SUCCESS] Id: 0HN6P2AJ0NOBP:00000011. Fetch Category  entity 
+2024-09-20 08:22:41.494 +07:00 [INF]  Id: 0HN6P2AJ0NOBP:00000013. Get Category  with null
+2024-09-20 08:22:41.529 +07:00 [INF] [SUCCESS] Id: 0HN6P2AJ0NOBP:00000013. Fetch Category  entity 
