@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BuildingBlock.Extensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
 using Serilog;
@@ -16,6 +17,7 @@ namespace BuildingBlock.Middlewares
         {
             _requestDelegate = requestDelegate;
             _logger = new LoggerConfiguration()
+            .Enrich.With(new IgnorePropertiesEnricher("MessageTemplate", "RenderedMessage", "Timestamp", "UtcTimestamp"))
             .WriteTo.MongoDB(databaseUrl: $"{connectionString}/{databaseName}", collectionName: collectionName)
             .CreateLogger();
         }
@@ -29,7 +31,12 @@ namespace BuildingBlock.Middlewares
             var userId = context.User.Identity?.Name ?? string.Empty;
             var queryString = context.Request.QueryString.ToString() ?? string.Empty;
             var routeData = context.GetRouteData();
-            var routeParams = routeData is not null ? string.Join(", ", routeData.Values.Select(kv => $"{kv.Key}: {kv.Value}")) : string.Empty;
+            var method = context.Request.Method;
+            var path = context.Request.Path;
+
+            var action = routeData.Values.ElementAt(0).Value.ToString();
+            var controller = routeData.Values.ElementAt(1).Value.ToString();
+            var parameters = routeData is not null ? string.Join(", ", routeData.Values.Skip(2).Select(kv => $"{kv.Key}: {kv.Value}")) : string.Empty;
             var requestBody = await FormatRequest(context.Request);
 
             var originalResponseBodyStream = context.Response.Body;
@@ -38,6 +45,9 @@ namespace BuildingBlock.Middlewares
                 context.Response.Body = responseBody;
                 try
                 {
+                    _logger.Information("Receive request. {TraceId} {RequestTime} {UserId} {RequestPath} {Method} {Action} {Controller} {QueryString} {Parameters} {RequestBody} ",
+                   traceIdentifier, requestTime, userId, path, method, action, controller, queryString, parameters, requestBody);
+
                     await _requestDelegate(context);
                 }
                 finally
@@ -46,10 +56,13 @@ namespace BuildingBlock.Middlewares
                     var statusCode = context.Response.StatusCode;
                     string responseData = await FormatResponse(context.Response);
                     responseData = FormatResponseToItemCountIfList(responseData);
+                    var timeHandled = responseTime - requestTime;
 
+                    _logger.Information("Handle request.  {TraceId} {StatusCode} {ResponseTime} {ResponseData} {TimeHandled}",
+                      traceIdentifier, statusCode, responseTime, responseData, timeHandled.TotalMilliseconds);
 
-                    _logger.Information("Handle request. {TraceId} {StatusCode} {UserId} {RequestTime} {QueryString} {RouteParams} {RequestBody} {ResponseData}",
-                   traceIdentifier, statusCode, userId, requestTime, queryString, routeParams, requestBody, responseData);
+                    // _logger.Information("Handle request. {TraceId} {StatusCode} {UserId} {RequestTime} {QueryString} {RouteParams} {RequestBody} {ResponseData}",
+                    //traceIdentifier, statusCode, userId, requestTime, queryString, routeParams, requestBody, responseData);
 
                     await responseBody.CopyToAsync(originalResponseBodyStream); // return the response to the client
                 }

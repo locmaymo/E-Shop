@@ -1,0 +1,142 @@
+2024-09-25 10:19:48.295 +07:00 [INF] [Start] TraceId:0HN6T23CKI9SF:00000002, Received request:/api/Product
+2024-09-25 10:19:48.341 +07:00 [INF] TraceId:0HN6T23CKI9SF:00000002, Create Product entity 
+2024-09-25 10:19:48.342 +07:00 [INF] TraceId:0HN6T23CKI9SF:00000002, Mapping ProductPostDTO to Product 
+2024-09-25 10:19:48.356 +07:00 [INF] TraceId:0HN6T23CKI9SF:00000002. Execute Add Product entity to database
+2024-09-25 10:20:04.576 +07:00 [ERR] An error occurred using the connection to database 'E_Shop' on server 'LAPTOP-AS7TTRIH\SQLEXPRESS'.
+2024-09-25 10:20:04.657 +07:00 [ERR] An exception occurred in the database while saving changes for context type 'Catalog.API.Models.CatalogDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SNI_PN11, error: 26 - Error Locating Server/Instance Specified)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover, SqlAuthenticationMethod authType)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransactionAsync(IsolationLevel isolationLevel, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransactionAsync(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SNI_PN11, error: 26 - Error Locating Server/Instance Specified)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover, SqlAuthenticationMethod authType)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransactionAsync(IsolationLevel isolationLevel, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransactionAsync(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+2024-09-25 10:20:04.771 +07:00 [ERR] [ERROR] TraceId:0HN6T23CKI9SF:00000002. Add Product entity with Id = 0 to database catch
+. -Exception:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SNI_PN11, error: 26 - Error Locating Server/Instance Specified)
+. -Stacktrace:   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover, SqlAuthenticationMethod authType)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransactionAsync(IsolationLevel isolationLevel, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransactionAsync(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Catalog.API.DAO.EntityDAO`1.AddEntity(T entity) in D:\Document\Documents\Project_CV\Microservices\E-Shop\EShop\src\Services\Catalog\Catalog.API\DAO\EntityDAO.cs:line 91.
+2024-09-25 10:20:04.869 +07:00 [ERR] TraceId:0HN6T23CKI9SF:00000002. An unexpected error occurred while createing the Product entity.
+. Exception:A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SNI_PN11, error: 26 - Error Locating Server/Instance Specified).
+ StackTrace:   at Catalog.API.DAO.EntityDAO`1.AddEntity(T entity) in D:\Document\Documents\Project_CV\Microservices\E-Shop\EShop\src\Services\Catalog\Catalog.API\DAO\EntityDAO.cs:line 106
+   at Catalog.API.Repository.ProductRepository.CreateProduct(ProductPostDTO productPostDTO) in D:\Document\Documents\Project_CV\Microservices\E-Shop\EShop\src\Services\Catalog\Catalog.API\Repository\ProductRepository.cs:line 33.
+BuildingBlock.Exceptions.InternalServerException: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SNI_PN11, error: 26 - Error Locating Server/Instance Specified)
+   at Catalog.API.DAO.EntityDAO`1.AddEntity(T entity) in D:\Document\Documents\Project_CV\Microservices\E-Shop\EShop\src\Services\Catalog\Catalog.API\DAO\EntityDAO.cs:line 106
+   at Catalog.API.Repository.ProductRepository.CreateProduct(ProductPostDTO productPostDTO) in D:\Document\Documents\Project_CV\Microservices\E-Shop\EShop\src\Services\Catalog\Catalog.API\Repository\ProductRepository.cs:line 33
+2024-09-25 10:20:05.131 +07:00 [ERR] Error Message: Product service has exception . A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SNI_PN11, error: 26 - Error Locating Server/Instance Specified), Time of occurence "2024-09-25T03:20:05.1317448Z"
+2024-09-25 10:20:32.522 +07:00 [INF] [Start] TraceId:0HN6T23CKI9SF:00000003, Received request:/api/Product
+2024-09-25 10:20:32.523 +07:00 [INF] TraceId:0HN6T23CKI9SF:00000003, Create Product entity 
+2024-09-25 10:20:32.524 +07:00 [INF] TraceId:0HN6T23CKI9SF:00000003, Mapping ProductPostDTO to Product 
+2024-09-25 10:20:32.526 +07:00 [INF] TraceId:0HN6T23CKI9SF:00000003. Execute Add Product entity to database
+2024-09-25 10:20:33.045 +07:00 [INF] [SUCCESS] TraceId:0HN6T23CKI9SF:00000003. Add Product entity with Id =16 to database success
+2024-09-25 10:41:04.754 +07:00 [INF] [Start] TraceId:0HN6T2FF9UN9S:00000002, Received request:/api/Product
+2024-09-25 10:41:04.808 +07:00 [INF] TraceId:0HN6T2FF9UN9S:00000002, Create Product entity 
+2024-09-25 10:41:04.810 +07:00 [INF] TraceId:0HN6T2FF9UN9S:00000002, Mapping ProductPostDTO to Product 
+2024-09-25 10:41:04.824 +07:00 [INF] TraceId:0HN6T2FF9UN9S:00000002. Execute Add Product entity to database
+2024-09-25 10:41:06.414 +07:00 [INF] [SUCCESS] TraceId:0HN6T2FF9UN9S:00000002. Add Product entity with Id =17 to database success
+2024-09-25 11:02:45.529 +07:00 [INF] [Start] TraceId:0HN6T2QORD2P2:00000002, Received request:/api/Product
+2024-09-25 11:02:45.575 +07:00 [INF] TraceId:0HN6T2QORD2P2:00000002, Create Product entity 
+2024-09-25 11:02:45.577 +07:00 [INF] TraceId:0HN6T2QORD2P2:00000002, Mapping ProductPostDTO to Product 
+2024-09-25 11:02:45.589 +07:00 [INF] TraceId:0HN6T2QORD2P2:00000002. Execute Add Product entity to database
+2024-09-25 11:02:47.186 +07:00 [INF] [SUCCESS] TraceId:0HN6T2QORD2P2:00000002. Add Product entity with Id =18 to database success
+2024-09-25 11:06:28.894 +07:00 [INF] [Start] TraceId:0HN6T2TJJO9V4:00000009, Received request:/api/Category/1
+2024-09-25 11:06:28.944 +07:00 [INF] TraceId:0HN6T2TJJO9V4:00000009, Get Category entity with Id = 1
+2024-09-25 11:06:28.969 +07:00 [INF] TraceId:0HN6T2TJJO9V4:00000009. Execute Query Category entity with c => (c.Id == value(Catalog.API.Repository.CategoryRepository+<>c__DisplayClass8_0).id) in database
+2024-09-25 11:06:30.640 +07:00 [INF] [SUCCESS] TraceId:0HN6T2TJJO9V4:00000009. Fetch Category with 1 entity 
+2024-09-25 11:16:24.571 +07:00 [INF] [Start] TraceId:0HN6T335V6N68:00000009, Received request:/api/Category/1
+2024-09-25 11:16:24.619 +07:00 [INF] TraceId:0HN6T335V6N68:00000009, Get Category entity with Id = 1
+2024-09-25 11:16:24.633 +07:00 [INF] TraceId:0HN6T335V6N68:00000009. Execute Query Category entity with c => (c.Id == value(Catalog.API.Repository.CategoryRepository+<>c__DisplayClass8_0).id) in database
+2024-09-25 11:16:26.205 +07:00 [INF] [SUCCESS] TraceId:0HN6T335V6N68:00000009. Fetch Category with 1 entity 
+2024-09-25 11:21:14.558 +07:00 [INF] [Start] TraceId:0HN6T35NSQFTF:00000009, Received request:/api/Category/1
+2024-09-25 11:21:14.605 +07:00 [INF] TraceId:0HN6T35NSQFTF:00000009, Get Category entity with Id = 1
+2024-09-25 11:21:14.619 +07:00 [INF] TraceId:0HN6T35NSQFTF:00000009. Execute Query Category entity with c => (c.Id == value(Catalog.API.Repository.CategoryRepository+<>c__DisplayClass8_0).id) in database
+2024-09-25 11:21:16.219 +07:00 [INF] [SUCCESS] TraceId:0HN6T35NSQFTF:00000009. Fetch Category with 1 entity 
+2024-09-25 11:23:23.968 +07:00 [INF] [Start] TraceId:0HN6T370JM3UF:00000009, Received request:/api/Category/1
+2024-09-25 11:23:24.014 +07:00 [INF] TraceId:0HN6T370JM3UF:00000009, Get Category entity with Id = 1
+2024-09-25 11:23:24.030 +07:00 [INF] TraceId:0HN6T370JM3UF:00000009. Execute Query Category entity with c => (c.Id == value(Catalog.API.Repository.CategoryRepository+<>c__DisplayClass8_0).id) in database
+2024-09-25 11:23:25.608 +07:00 [INF] [SUCCESS] TraceId:0HN6T370JM3UF:00000009. Fetch Category with 1 entity 
+2024-09-25 11:26:12.422 +07:00 [INF] [Start] TraceId:0HN6T38LFU7G5:00000009, Received request:/api/Category/1
+2024-09-25 11:26:12.472 +07:00 [INF] TraceId:0HN6T38LFU7G5:00000009, Get Category entity with Id = 1
+2024-09-25 11:26:12.486 +07:00 [INF] TraceId:0HN6T38LFU7G5:00000009. Execute Query Category entity with c => (c.Id == value(Catalog.API.Repository.CategoryRepository+<>c__DisplayClass8_0).id) in database
+2024-09-25 11:26:14.328 +07:00 [INF] [SUCCESS] TraceId:0HN6T38LFU7G5:00000009. Fetch Category with 1 entity 
+2024-09-25 11:28:53.186 +07:00 [INF] [Start] TraceId:0HN6T3A4V189O:00000009, Received request:/api/Category/1
+2024-09-25 11:28:53.236 +07:00 [INF] TraceId:0HN6T3A4V189O:00000009, Get Category entity with Id = 1
+2024-09-25 11:28:53.250 +07:00 [INF] TraceId:0HN6T3A4V189O:00000009. Execute Query Category entity with c => (c.Id == value(Catalog.API.Repository.CategoryRepository+<>c__DisplayClass8_0).id) in database
+2024-09-25 11:28:54.872 +07:00 [INF] [SUCCESS] TraceId:0HN6T3A4V189O:00000009. Fetch Category with 1 entity 
+2024-09-25 11:29:14.046 +07:00 [INF] [Start] TraceId:0HN6T3A4V189O:0000000B, Received request:/api/Category/1
+2024-09-25 11:29:14.047 +07:00 [INF] TraceId:0HN6T3A4V189O:0000000B, Get Category entity with Id = 1
+2024-09-25 11:29:14.048 +07:00 [INF] TraceId:0HN6T3A4V189O:0000000B. Execute Query Category entity with c => (c.Id == value(Catalog.API.Repository.CategoryRepository+<>c__DisplayClass8_0).id) in database
+2024-09-25 11:29:14.090 +07:00 [INF] [SUCCESS] TraceId:0HN6T3A4V189O:0000000B. Fetch Category with 1 entity 
