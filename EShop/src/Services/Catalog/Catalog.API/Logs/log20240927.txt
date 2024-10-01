@@ -1,0 +1,21 @@
+2024-09-27 11:12:45.994 +07:00 [INF] [Start] TraceId:0HN6UL9MDAAL2:0000000B, Received request:/api/Category
+2024-09-27 11:12:46.051 +07:00 [INF] TraceId:0HN6UL9MDAAL2:0000000B, Get Category entities}
+2024-09-27 11:12:46.063 +07:00 [INF] TraceId:0HN6UL9MDAAL2:0000000B. Execute Query Category entities with null in database
+2024-09-27 11:12:47.845 +07:00 [INF] [SUCCESS] TraceId:0HN6UL9MDAAL2:0000000B. Fetch Category with 2 entity 
+2024-09-27 11:13:16.437 +07:00 [INF] [Start] TraceId:0HN6UL9MDAAL2:0000000D, Received request:/api/Category
+2024-09-27 11:13:16.440 +07:00 [INF] TraceId:0HN6UL9MDAAL2:0000000D, Get Category entities}
+2024-09-27 11:13:16.442 +07:00 [INF] TraceId:0HN6UL9MDAAL2:0000000D. Execute Query Category entities with null in database
+2024-09-27 11:13:16.489 +07:00 [INF] [SUCCESS] TraceId:0HN6UL9MDAAL2:0000000D. Fetch Category with 2 entity 
+2024-09-27 11:24:04.792 +07:00 [INF] [Start] TraceId:0HN6ULGQ8IGTQ:00000009, Received request:/api/Category
+2024-09-27 11:24:04.836 +07:00 [INF] TraceId:0HN6ULGQ8IGTQ:00000009, Get Category entities}
+2024-09-27 11:24:04.846 +07:00 [INF] TraceId:0HN6ULGQ8IGTQ:00000009. Execute Query Category entities with null in database
+2024-09-27 11:24:06.338 +07:00 [INF] [SUCCESS] TraceId:0HN6ULGQ8IGTQ:00000009. Fetch Category with 2 entity 
+2024-09-27 11:24:22.908 +07:00 [INF] [Start] TraceId:0HN6ULGQ8IGTQ:0000000B, Received request:/api/Category
+2024-09-27 11:24:22.911 +07:00 [INF] TraceId:0HN6ULGQ8IGTQ:0000000B, Get Category entities}
+2024-09-27 11:24:22.913 +07:00 [INF] TraceId:0HN6ULGQ8IGTQ:0000000B. Execute Query Category entities with null in database
+2024-09-27 11:24:22.951 +07:00 [INF] [SUCCESS] TraceId:0HN6ULGQ8IGTQ:0000000B. Fetch Category with 2 entity 
+2024-09-27 11:26:48.729 +07:00 [INF] [Start] TraceId:0HN6ULGQ8IGTS:00000002, Received request:/api/Product
+2024-09-27 11:26:48.734 +07:00 [INF] TraceId:0HN6ULGQ8IGTS:00000002, Create Product entity 
+2024-09-27 11:26:48.735 +07:00 [INF] TraceId:0HN6ULGQ8IGTS:00000002, Mapping ProductPostDTO to Product 
+2024-09-27 11:26:48.741 +07:00 [INF] TraceId:0HN6ULGQ8IGTS:00000002. Execute Add Product entity to database
+2024-09-27 11:26:49.102 +07:00 [INF] [SUCCESS] TraceId:0HN6ULGQ8IGTS:00000002. Add Product entity with Id =19 to database success

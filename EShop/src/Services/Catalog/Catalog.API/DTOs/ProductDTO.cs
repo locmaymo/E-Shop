@@ -12,7 +12,7 @@ namespace Catalog.API.DTOs
         public double? UnitPrice { get; set; }
         public int? Discount { get; set; }
         public string? ImageURL { get; set; }
-
+        public int? Quantity { get; set; }
 
         public bool? IsActice { get; set; }
         public int? CategoryId { get; set; }
