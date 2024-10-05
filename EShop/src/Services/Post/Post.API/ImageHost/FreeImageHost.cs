@@ -5,37 +5,43 @@ using System.Text.Json;
 
 namespace Post.API.ImageHost
 {
-    public class FreeImageHost
+public class FreeImageHost
+{
+    public string Key {
+        get;
+        set;
+    }
+    public string Url {
+        get;
+        set;
+    }
+
+    public FreeImageHost(string key, string url)
     {
-        public string Key { get; set; }
-        public string Url { get; set; }
+        Key = key;
+        Url = url;
+    }
 
-        public FreeImageHost(string key, string url)
+    public async Task<string> UploadImageAsync(string base64)
+    {
+        using (var client = new HttpClient())
         {
-            Key = key;
-            Url = url;
-        }
+            var content = new MultipartFormDataContent();
+            content.Add(new StringContent(base64), "source");
+            content.Add(new StringContent(Key), "key");
 
-        public async Task<string> UploadImageAsync(string base64)
-        {
-            using (var client = new HttpClient())
+            var response = await client.PostAsync(Url, content);
+            response.EnsureSuccessStatusCode();
+
+            var responseBody = await response.Content.ReadAsStringAsync();
+            // to get url from response body access it in json format responseBody.image.url then return it
+            using (JsonDocument doc = JsonDocument.Parse(responseBody))
             {
-                var content = new MultipartFormDataContent();
-                content.Add(new StringContent(base64), "source");
-                content.Add(new StringContent(Key), "key");
-
-                var response = await client.PostAsync(Url, content);
-                response.EnsureSuccessStatusCode();
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-                // to get url from response body access it in json format responseBody.image.url then return it
-                using (JsonDocument doc = JsonDocument.Parse(responseBody))
-                {
-                    JsonElement root = doc.RootElement;
-                    JsonElement imageUrlElement = root.GetProperty("image").GetProperty("url");
-                    return imageUrlElement.GetString();
-                }
+                JsonElement root = doc.RootElement;
+                JsonElement imageUrlElement = root.GetProperty("image").GetProperty("url");
+                return imageUrlElement.GetString();
             }
         }
     }
+}
 }

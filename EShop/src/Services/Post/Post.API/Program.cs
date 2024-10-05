@@ -30,7 +30,7 @@ builder.Host.UseSerilog((context, services, configuration) =>
         rollingInterval: RollingInterval.Day,
         restrictedToMinimumLevel: LogEventLevel.Information); // Write logs to file
 });
-builder.Services.AddTransient<ICustomExceptionHandler, CustomExceptionHandler>();   
+builder.Services.AddTransient<ICustomExceptionHandler, CustomExceptionHandler>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
