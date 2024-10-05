@@ -1,4 +1,6 @@
 ﻿using Catalog.API.DTOs;
+using Catalog.API.Models;
+using System.Linq.Expressions;
 
 namespace Catalog.API.IRepository
 {
@@ -9,5 +11,6 @@ namespace Catalog.API.IRepository
         Task<int> CreateProduct(ProductPostDTO productPostDTO);
         Task<bool> UpdateProduct(ProductPutDTO productPutDTO);
         Task<bool> DeleteProduct(int id);
+        Task<ProductGetDTO> GetProduct(Expression<Func<Product, bool>> expression = null);
     }
 }

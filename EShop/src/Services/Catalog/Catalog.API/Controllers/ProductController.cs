@@ -155,5 +155,31 @@ namespace Catalog.API.Controllers
             }
 
         }
+
+        [HttpPost("ValidProducts")]
+        public async Task<IActionResult> GetValidProducts(Dictionary<int, int> quantityOfProducts)
+        {
+            try
+            {
+                var validProductIds = new List<int>();
+                foreach (var product in quantityOfProducts)
+                {
+                    var validProduct = await _productRepository.GetProduct(p => p.Id == product.Key && p.IsActice == true && p.Quantity > 0 && p.Quantity >= product.Value);
+                    if (validProduct != null)
+                    {
+                        validProductIds.Add(product.Key);
+                    }
+                }
+                if (validProductIds.Any())
+                {
+                    return Ok(validProductIds);
+                }
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                throw new ProductInternalException(ex.Message);
+            }
+        }
     }
 }

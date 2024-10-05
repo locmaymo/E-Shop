@@ -116,8 +116,8 @@ namespace Catalog.API.Repository
             _logger.LogInformation("TraceId:{id}, Get {Request} entity with Id = {Id}", requestId, typeof(Product).Name, id);
             try
             {
-                var Product = await GetEntity(c => c.Id == id, p => p.Category);
-                return _mapper.Map<ProductGetDTO>(Product);
+                var product = await GetEntity(p => p.Id == id, p => p.Category);
+                return _mapper.Map<ProductGetDTO>(product);
             }
             catch (ProductNotFoundException ex)
             {
@@ -139,6 +139,38 @@ namespace Catalog.API.Repository
             {
 
                 _logger.LogError(ex, "TraceId:{id}. An unexpected error occurred while retrieving the {Request} entity with Id = {Id}.\n. Exception:{exception}.\n StackTrace:{stackTrace}.", _httpContextAccessor.HttpContext?.TraceIdentifier, typeof(Product).Name, id, ex.Message, ex.StackTrace);
+                throw;
+            }
+        }
+
+        public async Task<ProductGetDTO> GetProduct(System.Linq.Expressions.Expression<Func<Product, bool>> expression = null)
+        {
+            _logger.LogInformation("TraceId:{id}, Get {Request} entity with query:{Query}", requestId, typeof(Product).Name, expression);
+            try
+            {
+                var product = await GetEntity(expression);
+                return _mapper.Map<ProductGetDTO>(product);
+            }
+            catch (ProductNotFoundException ex)
+            {
+
+                _logger.LogInformation("TraceId:{id}. Retrieved {Request} entity return null.\n. Exception:{exception}.\n StackTrace:{stackTrace}.", requestId, typeof(Product).Name, ex.Message, ex.StackTrace);
+                throw;
+            }
+            catch (AutoMapperMappingException ex)
+            {
+
+                _logger.LogError(ex, "TraceId:{id}. AutoMapper failed to map the {Model} to {DTO}.\n. Exception:{exception}.\n StackTrace:{stackTrace}.", _httpContextAccessor.HttpContext?.TraceIdentifier, typeof(Product).Name, typeof(ProductGetDTO).Name, ex.Message, ex.StackTrace);
+                throw;
+            }
+            catch (ProductInternalException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError(ex, "TraceId:{id}. An unexpected error occurred while retrieving the {Request} en.\n. Exception:{exception}.\n StackTrace:{stackTrace}.", _httpContextAccessor.HttpContext?.TraceIdentifier, typeof(Product).Name, ex.Message, ex.StackTrace);
                 throw;
             }
         }

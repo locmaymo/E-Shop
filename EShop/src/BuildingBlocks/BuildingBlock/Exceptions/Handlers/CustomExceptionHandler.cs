@@ -43,6 +43,12 @@ namespace BuildingBlock.Exceptions.Handlers
                     exception.GetType().Name,
                     httpContext.Response.StatusCode = StatusCodes.Status404NotFound
                 ),
+                ExternalApiException =>
+                (
+                    exception.Message,
+                    exception.GetType().Name,
+                    httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError
+                ),
                 _ =>
                 (
                     exception.Message,

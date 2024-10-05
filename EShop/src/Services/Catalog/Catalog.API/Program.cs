@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var mongoConnectionString = builder.Configuration["MongoSettings:ConnectionString"];
 var databaseName = builder.Configuration["MongoSettings:DatabaseName"];
-var collectionName = builder.Configuration["MongoSettings:CollectionName"];
+
 
 //log to file
 builder.Host.UseSerilog((context, services, configuration) =>
@@ -62,7 +62,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    app.UseMiddleware<RequestResponseLoggingMiddleware>(mongoConnectionString, databaseName, collectionName); //register middleware for logging
+    app.UseMiddleware<ResponseLoggingMiddleware>(mongoConnectionString, databaseName); //register middleware for logging
+    app.UseMiddleware<RequestLoggingMiddleware>(mongoConnectionString, databaseName); //register middleware for logging
     app.UseMiddleware<ExceptionHandlingMiddleware>();      //register handle exception
 }
 
